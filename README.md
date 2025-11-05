@@ -345,7 +345,6 @@ The following commands can be used.
 	    analyse
 	    deploy
 	    parser
-	    rdf
 	    server
 	    dataflow
 	    	core
