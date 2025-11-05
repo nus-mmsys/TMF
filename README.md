@@ -1,12 +1,12 @@
-# LibreDF (Libre Dataflow Framework)
+# TMF (Tiny Multimedia Framework)
 
 ## Introduction
 
-LibreDF is a framework for modeling stream processing system programs with a dataflow model. A dataflow model is a directed graph in which nodes represent computation tasks (called actors) and edges represent communication between a pair of actors. Modeling stream processing system programs with dataflow allows programs to be parallelized and distributed. LibreDF implements some OpenCV actors.
+TMF is a framework for modeling stream processing system programs with a dataflow model. A dataflow model is a directed graph in which nodes represent computation tasks (called actors) and edges represent communication between a pair of actors. Modeling stream processing system programs with dataflow allows programs to be parallelized and distributed. TMF implements some OpenCV actors.
 
 ## Application development
 
-Application developers specify the application graph in Dataflow Interchange Format (DIF). DIF is a general specification format for arbitrary dataflow models. LibreDF implements a subset of DIF explained below.
+Application developers specify the application graph in Dataflow Interchange Format (DIF). DIF is a general specification format for arbitrary dataflow models. TMF implements a subset of DIF explained below.
 
 - Topology: The topology of the graph including the nodes and edges is specified in the ```topology``` module.
 - Actors: Each actor has a number of properties that can be specified in the ```actor``` module. These properties are metadata that the actor needs during its execution (e.g. its computational behavior).
@@ -100,7 +100,7 @@ df canny {
 
 ## Actor developement
 
-LibreDF provides functions for actor developers. An actor inherits from the ```Actor``` class and defines a set of ports and their data type while construction. During the initialization, the actor can read the properties set in the dataflow specification in DIF. During the execution, the actor reads from the input ports and write to the output ports. Finally the actor destroys its ports.
+TMF provides functions for actor developers. An actor inherits from the ```Actor``` class and defines a set of ports and their data type while construction. During the initialization, the actor can read the properties set in the dataflow specification in DIF. During the execution, the actor reads from the input ports and write to the output ports. Finally the actor destroys its ports.
 
 - Construction: An actor can create input and output ports using ```createInputPort``` and ```createOutputPort```. For ports with variable number of inputs and outputs ```createInputPortVector``` and ```createOutputPortVector``` are used.
 - Initialization: During the initialization phase, the actor can read its properties. ```propEmpty``` checks if a property value is empty. To retrieve the value of a property ```getProp```, ```getPropInt```, and ```getPropFloat``` are used (for string, integer, and float).
@@ -272,13 +272,13 @@ Data parallelization is a mean to improve the latency and throughput of a datafl
 
 Data parallelization is possible only if the smaller tokens after slicing do not have dependencies. For example, in the Canny edge detection, after capturing a video frame, it is possible to slice a token into multiple tokens and perform Canny edge detection on smaller parts.
 
-Two special actors called ```MatSlice``` and ```MatMerge``` are provided in LibreDF for slicing and merging OpenCV ```Mat``` structure. These actors use the ports of variable arity (```createInputPortVector``` and ```createOutputPortVector```).
+Two special actors called ```MatSlice``` and ```MatMerge``` are provided in TMF for slicing and merging OpenCV ```Mat``` structure. These actors use the ports of variable arity (```createInputPortVector``` and ```createOutputPortVector```).
 
 ## Distribution
 
 Computation powers can be limited limited and as a result, the execution time of an actor on a local processor can become too costly. In such cases, if the communication bandwidth is high enough, the actor can be distributed on a remote processor. 
 
-LibreDF provides support for such actor distribution using two tools. 
+TMF provides support for such actor distribution using two tools. 
 
 - df-deploy: It deploys a dataflow on multiple servers. It communicate with specified df-servers. 
 - df-server: receives command from df-deploy and executes only actors specified for the machine on which it is running. df-server runs on all machines hosting actors.
