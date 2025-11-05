@@ -19,26 +19,31 @@ then
 	exit 1
 fi
 
+
 DF_HOME="${HOME}/Documents/df"
 if [ ! -d $DF_HOME ]
 then
 	mkdir $DF_HOME
 fi
+
 CASCADE="${DF_HOME}/haarcascades"
 if [ ! -d $CASCADE ]
 then
 	mkdir $CASCADE
 fi
+
 OUTPUTS="${DF_HOME}/outputs"
 if [ ! -d $OUTPUTS ]
 then
 	mkdir $OUTPUTS
 fi
+
 LOGS="${DF_HOME}/logs"
 if [ ! -d $LOGS ]
 then
 	mkdir $LOGS
 fi
+
 cp -n ${OCV}/share/opencv/haarcascades/*.xml ${CASCADE}/
 if [ $# == 0 ]
 then
